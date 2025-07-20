@@ -1,36 +1,66 @@
-# Turborepo starter
 
-This Turborepo starter is maintained by the Turborepo core team.
+# PaySwift
 
-## Using this example
+PaySwift is a monorepo for a payment platform inspired by Paytm, built with Next.js, TypeScript, and Prisma. It is organized for scalability and maintainability, with separate apps for merchants and users, and shared packages for UI, database, and configuration.
 
-Run the following command:
+## Project Structure
 
-```sh
-npx create-turbo@latest
+```
+PaySwift/
+├── apps/
+│   ├── merchant-app/   # Next.js app for merchants
+│   └── user-app/       # Next.js app for users
+├── packages/
+│   ├── db/             # Prisma schema and migrations
+│   ├── eslint-config/  # Shared ESLint config
+│   ├── typescript-config/ # Shared TypeScript config
+│   └── ui/             # Shared React UI components
+├── package.json        # Root config, scripts, and workspaces
+├── turbo.json          # Turborepo configuration
+└── README.md           # Project documentation
 ```
 
-## What's inside?
+## How to Run Locally
 
-This Turborepo includes the following packages/apps:
+1. **Install dependencies**
+   ```sh
+   npm install
+   ```
 
-### Apps and Packages
+2. **Set up the database**
+   - Edit your database connection string in `packages/db/prisma/schema.prisma` if needed.
+   - Run Prisma migrations:
+     ```sh
+     npx prisma migrate dev --schema=packages/db/prisma/schema.prisma
+     ```
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+3. **Start development servers**
+   ```sh
+   npm run dev
+   ```
+   This will start both `merchant-app` and `user-app` locally.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+## Apps
 
-### Utilities
+- **merchant-app**: Next.js app for merchant features and dashboard.
+- **user-app**: Next.js app for user-facing features.
 
-This Turborepo has some additional tools already setup for you:
+## Packages
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- **db**: Prisma ORM setup, schema, and migrations.
+- **eslint-config**: Shared ESLint rules.
+- **typescript-config**: Shared TypeScript configuration.
+- **ui**: Reusable React components for both apps.
+
+## Development Notes
+
+- All code is written in TypeScript.
+- Shared logic and UI components are imported from the `ui` package.
+- Database schema and migrations are managed with Prisma in the `db` package.
+
+## License
+
+MIT
 
 ### Build
 
